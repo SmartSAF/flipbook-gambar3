@@ -12,32 +12,20 @@
     <div class="nav-button left" onclick="flipPrev()">&#10094;</div>
     <div class="nav-button right" onclick="flipNext()">&#10095;</div>
 
+    <!-- Tombol Zoom -->
+    <div class="zoom-buttons">
+        <button onclick="zoomIn()">+</button>
+        <button onclick="zoomOut()">-</button>
+    </div>
+
     <!-- Flipbook -->
     <div id="flipbook">
-        <!-- Halaman 1 -->
-        <div class="page">
-            <img src="images/image1.png" alt="Gambar 1">
-        </div>
-
-        <!-- Halaman 2 -->
-        <div class="page">
-            <img src="images/image2.png" alt="Gambar 2">
-        </div>
-
-        <!-- Halaman 3 -->
-        <div class="page">
-            <img src="images/image3.png" alt="Gambar 3">
-        </div>
-
-        <!-- Halaman 4 -->
-        <div class="page">
-            <img src="images/image4.png" alt="Gambar 4">
-        </div>
-
-        <!-- Halaman 5 -->
-        <div class="page">
-            <img src="images/image5.png" alt="Gambar 5">
-        </div>
+        <!-- Halaman 1 hingga 30 -->
+        <!-- Anda bisa menambahkan lebih banyak halaman sesuai kebutuhan -->
+        <div class="page"><img src="images/image1.png" alt="Gambar 1"></div>
+        <div class="page"><img src="images/image2.png" alt="Gambar 2"></div>
+        <div class="page"><img src="images/image3.png" alt="Gambar 3"></div>
+        <!-- Tambahkan halaman 4 hingga 30 di sini -->
     </div>
 
     <!-- Garis Navigasi -->
@@ -60,14 +48,14 @@
             const flipbook = $('#flipbook');
             const slider = $('#slider');
             const pageNumber = $('#pageNumber');
-            const totalPages = 5; // Total halaman
+            const totalPages = 30; // Total halaman
 
             // Inisialisasi Turn.js
             flipbook.turn({
                 width: '100%',
                 height: '80vh',
                 autoCenter: true,
-                duration: 1500, // Durasi animasi flip diperlambat
+                duration: 2000, // Durasi animasi flip diperlambat lagi
                 acceleration: false, // Nonaktifkan percepatan animasi
                 gradients: true, // Efek gradien saat flip
                 display: 'single', // Tampilkan satu halaman per kertas
@@ -132,6 +120,22 @@
                 flipbook.turn('next');
             }
 
+            // Fungsi untuk zoom in
+            function zoomIn() {
+                const currentZoom = flipbook.turn('zoom');
+                if (currentZoom < 2) {
+                    flipbook.turn('zoom', currentZoom + 0.1);
+                }
+            }
+
+            // Fungsi untuk zoom out
+            function zoomOut() {
+                const currentZoom = flipbook.turn('zoom');
+                if (currentZoom > 0.5) {
+                    flipbook.turn('zoom', currentZoom - 0.1);
+                }
+            }
+
             // Inisialisasi posisi slider
             updateSliderPosition(1);
 
@@ -149,8 +153,8 @@
                 const currentX = e.pageX || e.originalEvent.touches[0].pageX;
                 const deltaX = currentX - startX;
 
-                // Geser hingga 75% dari lebar halaman baru halaman dibalik
-                const threshold = flipbook.width() * 0.75;
+                // Geser hingga 87% dari lebar halaman baru halaman dibalik
+                const threshold = flipbook.width() * 0.87;
 
                 if (deltaX > threshold) {
                     flipPrev();
