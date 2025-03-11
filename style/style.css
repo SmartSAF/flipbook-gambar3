@@ -8,7 +8,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #6a11cb, #2575fc, #2af598); /* Gradiasi ungu, biru, hijau */
+    background: transparent; /* Hilangkan latar belakang */
 }
 
 #flipbook {
@@ -34,8 +34,7 @@ body {
 /* Tombol Navigasi */
 .nav-button {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 10px; /* Posisi tombol di atas buku */
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     font-size: 24px;
