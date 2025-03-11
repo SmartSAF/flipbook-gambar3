@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.1/turn.min.css">
 </head>
 <body>
+    <!-- Tombol Navigasi -->
+    <div class="nav-button left" onclick="flipPrev()">&#10094;</div>
+    <div class="nav-button right" onclick="flipNext()">&#10095;</div>
+
     <!-- Flipbook -->
     <div id="flipbook">
         <!-- Halaman 1 -->
@@ -34,36 +38,6 @@
         <div class="page">
             <img src="images/image5.png" alt="Gambar 5">
         </div>
-
-      <!-- Halaman 6 -->
-        <div class="page">
-            <img src="images/image6.png" alt="Gambar 6">
-        </div>
-
-      <!-- Halaman 7 -->
-        <div class="page">
-            <img src="images/image7.png" alt="Gambar 7">
-        </div>
-
-      <!-- Halaman 8 -->
-        <div class="page">
-            <img src="images/image8.png" alt="Gambar 8">
-        </div>
-
-      <!-- Halaman 9 -->
-        <div class="page">
-            <img src="images/image9.png" alt="Gambar 9">
-        </div>
-
-      <!-- Halaman 10 -->
-        <div class="page">
-            <img src="images/image10.png" alt="Gambar 10">
-        </div>
-
-      <!-- Halaman 11 -->
-        <div class="page">
-            <img src="images/image11.png" alt="Gambar 11">
-        </div>
     </div>
 
     <!-- Garis Navigasi -->
@@ -86,7 +60,7 @@
             const flipbook = $('#flipbook');
             const slider = $('#slider');
             const pageNumber = $('#pageNumber');
-            const totalPages = 11; // Total halaman
+            const totalPages = 5; // Total halaman
 
             // Inisialisasi Turn.js
             flipbook.turn({
@@ -148,8 +122,45 @@
                 });
             });
 
+            // Fungsi untuk membalik ke halaman sebelumnya
+            function flipPrev() {
+                flipbook.turn('previous');
+            }
+
+            // Fungsi untuk membalik ke halaman berikutnya
+            function flipNext() {
+                flipbook.turn('next');
+            }
+
             // Inisialisasi posisi slider
             updateSliderPosition(1);
+
+            // Geser halaman dengan jari
+            let startX = 0;
+            let isDragging = false;
+
+            flipbook.on('mousedown touchstart', function(e) {
+                startX = e.pageX || e.originalEvent.touches[0].pageX;
+                isDragging = true;
+            });
+
+            flipbook.on('mousemove touchmove', function(e) {
+                if (!isDragging) return;
+                const currentX = e.pageX || e.originalEvent.touches[0].pageX;
+                const deltaX = currentX - startX;
+
+                if (deltaX > 50) {
+                    flipPrev();
+                    isDragging = false;
+                } else if (deltaX < -50) {
+                    flipNext();
+                    isDragging = false;
+                }
+            });
+
+            flipbook.on('mouseup touchend', function() {
+                isDragging = false;
+            });
         });
     </script>
 </body>
