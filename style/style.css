@@ -8,7 +8,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: transparent; /* Hilangkan latar belakang */
+    background: linear-gradient(135deg, #6a11cb, #2575fc, #2af598); /* Gradiasi ungu, biru, hijau */
 }
 
 #flipbook {
