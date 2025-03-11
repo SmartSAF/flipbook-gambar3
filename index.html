@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipbook Gambar Bisnis 2025</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.1/turn.min.css">
+</head>
+<body>
+    <!-- Flipbook -->
+    <div id="flipbook">
+        <!-- Halaman 1 -->
+        <div class="page">
+            <img src="images/image1.png" alt="Gambar 1">
+        </div>
+
+        <!-- Halaman 2 -->
+        <div class="page">
+            <img src="images/image2.png" alt="Gambar 2">
+        </div>
+
+        <!-- Halaman 3 -->
+        <div class="page">
+            <img src="images/image3.png" alt="Gambar 3">
+        </div>
+
+        <!-- Halaman 4 -->
+        <div class="page">
+            <img src="images/image4.png" alt="Gambar 4">
+        </div>
+
+        <!-- Halaman 5 -->
+        <div class="page">
+            <img src="images/image5.png" alt="Gambar 5">
+        </div>
+
+      <!-- Halaman 6 -->
+        <div class="page">
+            <img src="images/image6.png" alt="Gambar 6">
+        </div>
+
+      <!-- Halaman 7 -->
+        <div class="page">
+            <img src="images/image7.png" alt="Gambar 7">
+        </div>
+
+      <!-- Halaman 8 -->
+        <div class="page">
+            <img src="images/image8.png" alt="Gambar 8">
+        </div>
+
+      <!-- Halaman 9 -->
+        <div class="page">
+            <img src="images/image9.png" alt="Gambar 9">
+        </div>
+
+      <!-- Halaman 10 -->
+        <div class="page">
+            <img src="images/image10.png" alt="Gambar 10">
+        </div>
+
+      <!-- Halaman 11 -->
+        <div class="page">
+            <img src="images/image11.png" alt="Gambar 11">
+        </div>
+    </div>
+
+    <!-- Garis Navigasi -->
+    <div class="navigation-container">
+        <div class="navigation-bar">
+            <div class="slider" id="slider"></div>
+        </div>
+        <div class="page-number" id="pageNumber">Halaman 1</div>
+    </div>
+
+    <!-- Load jQuery dari CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Load Turn.js dari folder javascript -->
+    <script src="javascript/turn.min.js"></script>
+    <!-- Efek Suara -->
+    <audio id="pageSound" src="sounds/page-flip.mp3"></audio>
+    <!-- Script Flipbook -->
+    <script>
+        $(document).ready(function() {
+            const flipbook = $('#flipbook');
+            const slider = $('#slider');
+            const pageNumber = $('#pageNumber');
+            const totalPages = 5; // Total halaman
+
+            // Inisialisasi Turn.js
+            flipbook.turn({
+                width: '100%',
+                height: '80vh',
+                autoCenter: true,
+                duration: 1000, // Durasi animasi flip
+                acceleration: true, // Aktifkan percepatan animasi
+                gradients: true, // Efek gradien saat flip
+                display: 'single', // Tampilkan satu halaman per kertas
+                when: {
+                    turning: function(e, page) {
+                        updateSliderPosition(page); // Perbarui posisi slider
+                        playSound(); // Memutar suara saat halaman dibalik
+                    }
+                }
+            });
+
+            // Fungsi untuk memutar suara
+            function playSound() {
+                const sound = document.getElementById('pageSound');
+                sound.currentTime = 0; // Reset suara ke awal
+                sound.play();
+            }
+
+            // Fungsi untuk memperbarui posisi slider
+            function updateSliderPosition(page) {
+                const sliderWidth = $('.navigation-bar').width();
+                const sliderPosition = ((page - 1) / (totalPages - 1)) * (sliderWidth - 20);
+                slider.css('left', sliderPosition + 'px');
+                pageNumber.text(`Halaman ${page}`);
+            }
+
+            // Fungsi untuk menggeser slider
+            slider.on('mousedown touchstart', function(e) {
+                e.preventDefault();
+                const barWidth = $('.navigation-bar').width();
+                const sliderWidth = slider.width();
+                const startX = e.pageX || e.originalEvent.touches[0].pageX;
+                const startLeft = parseFloat(slider.css('left'));
+
+                $(document).on('mousemove touchmove', function(e) {
+                    const moveX = (e.pageX || e.originalEvent.touches[0].pageX) - startX;
+                    let newLeft = startLeft + moveX;
+
+                    // Batasi gerakan slider
+                    if (newLeft < 0) newLeft = 0;
+                    if (newLeft > barWidth - sliderWidth) newLeft = barWidth - sliderWidth;
+
+                    slider.css('left', newLeft + 'px');
+
+                    // Hitung halaman berdasarkan posisi slider
+                    const page = Math.round((newLeft / (barWidth - sliderWidth)) * (totalPages - 1)) + 1;
+                    flipbook.turn('page', page);
+                });
+
+                $(document).on('mouseup touchend', function() {
+                    $(document).off('mousemove touchmove');
+                });
+            });
+
+            // Inisialisasi posisi slider
+            updateSliderPosition(1);
+        });
+    </script>
+</body>
+</html>
