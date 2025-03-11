@@ -12,12 +12,6 @@
     <div class="nav-button left" onclick="flipPrev()">&#10094;</div>
     <div class="nav-button right" onclick="flipNext()">&#10095;</div>
 
-    <!-- Tombol Zoom -->
-    <div class="zoom-buttons">
-        <button onclick="zoomIn()">+</button>
-        <button onclick="zoomOut()">-</button>
-    </div>
-
     <!-- Flipbook -->
     <div id="flipbook">
         <!-- Halaman 1 hingga 30 -->
@@ -25,6 +19,15 @@
         <div class="page"><img src="images/image1.png" alt="Gambar 1"></div>
         <div class="page"><img src="images/image2.png" alt="Gambar 2"></div>
         <div class="page"><img src="images/image3.png" alt="Gambar 3"></div>
+        <div class="page"><img src="images/image4.png" alt="Gambar 4"></div>
+        <div class="page"><img src="images/image5.png" alt="Gambar 5"></div>
+        <div class="page"><img src="images/image6.png" alt="Gambar 6"></div>
+        <div class="page"><img src="images/image7.png" alt="Gambar 7"></div>
+        <div class="page"><img src="images/image8.png" alt="Gambar 8"></div>
+        <div class="page"><img src="images/image9.png" alt="Gambar 9"></div>
+        <div class="page"><img src="images/image10.png" alt="Gambar 10"></div>
+        <div class="page"><img src="images/image11.png" alt="Gambar 11"></div>
+        <div class="page"><img src="images/image12.png" alt="Gambar 12"></div>
         <!-- Tambahkan halaman 4 hingga 30 di sini -->
     </div>
 
@@ -52,10 +55,10 @@
 
             // Inisialisasi Turn.js
             flipbook.turn({
-                width: '100%',
+                width: '97%', // Lebar flipbook 97% dari layar
                 height: '80vh',
                 autoCenter: true,
-                duration: 2000, // Durasi animasi flip diperlambat lagi
+                duration: 2000, // Durasi animasi flip diperlambat
                 acceleration: false, // Nonaktifkan percepatan animasi
                 gradients: true, // Efek gradien saat flip
                 display: 'single', // Tampilkan satu halaman per kertas
@@ -118,22 +121,6 @@
             // Fungsi untuk membalik ke halaman berikutnya
             function flipNext() {
                 flipbook.turn('next');
-            }
-
-            // Fungsi untuk zoom in
-            function zoomIn() {
-                const currentZoom = flipbook.turn('zoom');
-                if (currentZoom < 2) {
-                    flipbook.turn('zoom', currentZoom + 0.1);
-                }
-            }
-
-            // Fungsi untuk zoom out
-            function zoomOut() {
-                const currentZoom = flipbook.turn('zoom');
-                if (currentZoom > 0.5) {
-                    flipbook.turn('zoom', currentZoom - 0.1);
-                }
             }
 
             // Inisialisasi posisi slider
