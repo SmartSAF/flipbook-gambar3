@@ -15,6 +15,7 @@ body {
     width: 97%; /* Lebar flipbook 97% dari layar */
     height: 80vh;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    background: transparent; /* Hilangkan kontainer di belakang buku */
 }
 
 .page {
@@ -42,6 +43,7 @@ body {
     cursor: pointer;
     border-radius: 50%;
     user-select: none;
+    z-index: 1000; /* Pastikan tombol di atas flipbook */
 }
 
 .nav-button.left {
