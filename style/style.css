@@ -23,13 +23,13 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Bayangan untuk halaman */
 }
 
 .page img {
     max-width: 100%;
     max-height: 100%;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Tombol Navigasi */
@@ -87,4 +87,27 @@ body {
     margin-top: 10px;
     font-size: 16px;
     color: #333;
+}
+
+/* Tombol Zoom */
+.zoom-buttons {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.zoom-buttons button {
+    padding: 10px 20px;
+    background-color: #2575fc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.zoom-buttons button:hover {
+    background-color: #1a5bbf;
 }
