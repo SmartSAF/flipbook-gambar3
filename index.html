@@ -13,9 +13,22 @@
         <!-- Cover (Halaman Tunggal) -->
         <div class="page cover"><img src="images/cover.png" alt="Cover"></div>
         <!-- Halaman 1 hingga 30 -->
+        <!-- Anda bisa menambahkan lebih banyak halaman sesuai kebutuhan -->
         <div class="page"><img src="images/image1.png" alt="Gambar 1"></div>
         <div class="page"><img src="images/image2.png" alt="Gambar 2"></div>
         <div class="page"><img src="images/image3.png" alt="Gambar 3"></div>
+        <div class="page"><img src="images/image4.png" alt="Gambar 4"></div>
+        <div class="page"><img src="images/image5.png" alt="Gambar 5"></div>
+        <div class="page"><img src="images/image6.png" alt="Gambar 6"></div>
+        <div class="page"><img src="images/image7.png" alt="Gambar 7"></div>
+        <div class="page"><img src="images/image8.png" alt="Gambar 8"></div>
+        <div class="page"><img src="images/image9.png" alt="Gambar 9"></div>
+        <div class="page"><img src="images/image10.png" alt="Gambar 10"></div>
+        <div class="page"><img src="images/image11.png" alt="Gambar 11"></div>
+        <div class="page"><img src="images/image12.png" alt="Gambar 12"></div>
+        <div class="page"><img src="images/image13.png" alt="Gambar 13"></div>
+        <div class="page"><img src="images/image14.png" alt="Gambar 14"></div>
+        <div class="page"><img src="images/image15.png" alt="Gambar 15"></div>
         <!-- Tambahkan halaman 4 hingga 30 di sini -->
     </div>
 
@@ -50,12 +63,22 @@
                 width: '97%', // Lebar flipbook 97% dari layar
                 height: '80vh',
                 autoCenter: true,
-                duration: 2500, // Durasi animasi flip diperlambat lebih lanjut
+                duration: 1200, // Kecepatan flip sedang
                 acceleration: false, // Nonaktifkan percepatan animasi
                 gradients: false, // Nonaktifkan efek gradien saat flip
                 display: 'double', // Tampilkan dua halaman (seperti buku terbuka)
                 when: {
+                    start: function(e, page) {
+                        // Saat cover, tampilkan satu halaman di tengah
+                        if (page === 1) {
+                            flipbook.turn('display', 'single');
+                        }
+                    },
                     turning: function(e, page) {
+                        // Saat halaman dibalik, pastikan tampilan dua halaman
+                        if (page !== 1) {
+                            flipbook.turn('display', 'double');
+                        }
                         updateSliderPosition(page); // Perbarui posisi slider
                         playSound(); // Memutar suara saat halaman dibalik
                     }
@@ -132,8 +155,8 @@
                 const currentX = e.pageX || e.originalEvent.touches[0].pageX;
                 const deltaX = currentX - startX;
 
-                // Geser hingga 87% dari lebar halaman baru halaman dibalik
-                const threshold = flipbook.width() * 0.87;
+                // Geser hingga 80% dari lebar halaman baru halaman dibalik
+                const threshold = flipbook.width() * 0.8;
 
                 if (deltaX > threshold) {
                     flipPrev();
